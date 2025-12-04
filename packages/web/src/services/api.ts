@@ -108,7 +108,13 @@ export const inventoryApi = {
   }),
 };
 
-// Types (re-exported for convenience)
+/**
+ * API Response Types
+ * 
+ * Note: These types are intentionally defined here rather than imported from @toyota-inventory/common
+ * because they represent the JSON API response format where dates are strings (ISO 8601)
+ * rather than Date objects. This ensures type safety when working with API responses.
+ */
 export interface Vehicle {
   id: string;
   vin: string;
