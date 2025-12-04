@@ -80,6 +80,52 @@ describe('Vehicle API', () => {
       expect(response.status).toBe(400);
     });
   });
+
+  describe('POST /api/vehicles/vin/lookup', () => {
+    it('should lookup a valid VIN and return decoded info', async () => {
+      // Using a known VIN from the sample data - let's get one first
+      const vehiclesResponse = await request(app).get('/api/vehicles');
+      const firstVehicle = vehiclesResponse.body[0];
+      
+      const response = await request(app)
+        .post('/api/vehicles/vin/lookup')
+        .send({ vin: firstVehicle.vin });
+
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty('found');
+      expect(response.body).toHaveProperty('decoded');
+    });
+
+    it('should return 400 for missing VIN', async () => {
+      const response = await request(app)
+        .post('/api/vehicles/vin/lookup')
+        .send({});
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('VIN is required');
+    });
+
+    it('should return 400 for invalid VIN format', async () => {
+      const response = await request(app)
+        .post('/api/vehicles/vin/lookup')
+        .send({ vin: 'INVALID' });
+
+      expect(response.status).toBe(400);
+      expect(response.body.error).toBe('Invalid VIN');
+    });
+
+    it('should return decoded info even when vehicle not found', async () => {
+      // Use a valid VIN that isn't in our inventory (all 1s is a valid VIN check)
+      const response = await request(app)
+        .post('/api/vehicles/vin/lookup')
+        .send({ vin: '11111111111111111' });
+
+      expect(response.status).toBe(200);
+      expect(response.body.found).toBe(false);
+      expect(response.body.decoded).toBeDefined();
+      expect(response.body.vehicle).toBeUndefined();
+    });
+  });
 });
 
 describe('Customer API', () => {

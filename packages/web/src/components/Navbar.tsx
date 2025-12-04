@@ -21,6 +21,9 @@ export function Navbar() {
         <li className={isActive('/inventory') ? 'active' : ''}>
           <Link to="/inventory">Inventario</Link>
         </li>
+        <li className={isActive('/vin-scanner') ? 'active' : ''}>
+          <Link to="/vin-scanner">VIN Scanner</Link>
+        </li>
         <li className={isActive('/customers') ? 'active' : ''}>
           <Link to="/customers">Clientes</Link>
         </li>
