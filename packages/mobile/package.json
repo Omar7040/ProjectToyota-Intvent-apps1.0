@@ -1,0 +1,21 @@
+{
+  "name": "@toyota-inventory/mobile",
+  "version": "1.0.0",
+  "description": "Mobile application for Toyota Inventory Management System (React Native)",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo 'Mobile app - run with React Native CLI or Expo'",
+    "android": "echo 'Run: npx react-native run-android'",
+    "ios": "echo 'Run: npx react-native run-ios'"
+  },
+  "keywords": [
+    "toyota",
+    "inventory",
+    "mobile",
+    "react-native"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "license": "MIT",
+  "readme": "This is a placeholder for the React Native mobile application. To set up the mobile app, use 'npx react-native init' or 'npx create-expo-app' in this directory."
+}

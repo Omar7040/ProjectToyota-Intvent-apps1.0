@@ -1,0 +1,19 @@
+{
+  "name": "@toyota-inventory/common",
+  "version": "1.0.0",
+  "description": "Shared types and utilities for Toyota Inventory Management System",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/parser": "^6.18.1",
+    "@typescript-eslint/eslint-plugin": "^6.18.1"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,247 @@
+.customers-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.header-content h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #1a1a2e;
+}
+
+.header-content p {
+  margin: 0.25rem 0 0;
+  color: #666;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filters-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #e94560;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #e0e0e0;
+}
+
+.filter-btn.active {
+  background: #e94560;
+  color: #fff;
+}
+
+.customers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.customer-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.customer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.customer-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.customer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e94560 0%, #d63850 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.customer-info {
+  flex: 1;
+}
+
+.customer-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1a1a2e;
+}
+
+.customer-contact {
+  margin: 0.25rem 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.customer-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.customer-address {
+  margin: 0 0 0.75rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.customer-notes {
+  margin: 0 0 0.75rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #666;
+  font-size: 0.9rem;
+  border-left: 3px solid #e94560;
+}
+
+.customer-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.customer-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.btn-interested {
+  background: #17a2b8;
+  color: #fff;
+}
+
+.btn-interested:hover {
+  background: #138496;
+}
+
+.btn-negotiating {
+  background: #ffc107;
+  color: #212529;
+}
+
+.btn-negotiating:hover {
+  background: #e0a800;
+}
+
+.btn-approved {
+  background: #28a745;
+  color: #fff;
+}
+
+.btn-approved:hover {
+  background: #218838;
+}
+
+.btn-lost {
+  background: #dc3545;
+  color: #fff;
+}
+
+.btn-lost:hover {
+  background: #c82333;
+}
+
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #666;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.2rem;
+}
+
+.loading {
+  color: #666;
+}
+
+.error {
+  color: #dc3545;
+  background: #f8d7da;
+  border-radius: 8px;
+}

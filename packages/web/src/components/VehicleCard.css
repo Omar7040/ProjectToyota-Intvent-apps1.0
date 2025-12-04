@@ -1,0 +1,136 @@
+.vehicle-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.vehicle-header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+.vehicle-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.vehicle-condition {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.vehicle-image {
+  height: 140px;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vehicle-icon {
+  font-size: 4rem;
+  opacity: 0.6;
+}
+
+.vehicle-info {
+  padding: 1rem;
+}
+
+.vehicle-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.vehicle-price {
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e94560;
+}
+
+.vehicle-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.detail-icon {
+  font-size: 1rem;
+}
+
+.vehicle-vin {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #999;
+  font-family: monospace;
+}
+
+.vehicle-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.feature-tag {
+  padding: 0.25rem 0.5rem;
+  background: #f0f0f0;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.feature-tag.more {
+  background: #e94560;
+  color: #fff;
+}
+
+.vehicle-actions {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.btn-reserve {
+  background: #e94560;
+  color: #fff;
+}
+
+.btn-reserve:hover {
+  background: #d63850;
+}

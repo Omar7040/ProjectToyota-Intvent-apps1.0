@@ -1,0 +1,31 @@
+{
+  "name": "toyota-inventory-management",
+  "version": "1.0.0",
+  "description": "Toyota Dealer Inventory Management System - Web and Mobile apps for car inventory, sales tracking, and customer management",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "backend:dev": "npm run dev -w packages/backend",
+    "backend:build": "npm run build -w packages/backend",
+    "backend:start": "npm run start -w packages/backend",
+    "backend:test": "npm run test -w packages/backend",
+    "web:dev": "npm run dev -w packages/web",
+    "web:build": "npm run build -w packages/web",
+    "web:test": "npm run test -w packages/web",
+    "common:build": "npm run build -w packages/common",
+    "build": "npm run common:build && npm run backend:build && npm run web:build",
+    "test": "npm run backend:test && npm run web:test",
+    "lint": "npm run lint -w packages/backend -w packages/web -w packages/common"
+  },
+  "keywords": [
+    "toyota",
+    "inventory",
+    "dealer",
+    "sales",
+    "management"
+  ],
+  "author": "Omar7040",
+  "license": "MIT"
+}
