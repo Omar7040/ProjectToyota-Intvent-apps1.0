@@ -101,7 +101,12 @@ function appendToLogFile(entry) {
   try {
     ensureLogDirectory();
     const logLine = JSON.stringify(entry) + '\n';
-    fs.appendFileSync(LOG_FILE_PATH, logLine);
+    // Use asynchronous file operation to avoid blocking the event loop
+    fs.appendFile(LOG_FILE_PATH, logLine, (err) => {
+      if (err) {
+        console.error('Failed to write to log file:', err.message);
+      }
+    });
   } catch (error) {
     console.error('Failed to write to log file:', error.message);
   }
