@@ -1,6 +1,13 @@
 import { Router, Request, Response } from 'express';
 import { vehicleService } from '../services/vehicleService';
-import { CreateVehicleDTO, UpdateVehicleDTO, VehicleStatus } from '@toyota-inventory/common';
+import { 
+  CreateVehicleDTO, 
+  UpdateVehicleDTO, 
+  VehicleStatus,
+  validateVin,
+  decodeVin,
+  VinLookupResult 
+} from '@toyota-inventory/common';
 
 const router = Router();
 
@@ -59,12 +66,12 @@ router.get('/available', (_req: Request, res: Response) => {
 });
 
 /**
- * GET /api/vehicles/:id
- * Get vehicle by ID
+ * GET /api/vehicles/vin/:vin
+ * Get vehicle by VIN - simple lookup
  */
-router.get('/:id', (req: Request, res: Response) => {
+router.get('/vin/:vin', (req: Request, res: Response) => {
   try {
-    const vehicle = vehicleService.getVehicleById(req.params.id);
+    const vehicle = vehicleService.getVehicleByVin(req.params.vin);
     if (!vehicle) {
       return res.status(404).json({ error: 'Vehicle not found' });
     }
@@ -75,12 +82,66 @@ router.get('/:id', (req: Request, res: Response) => {
 });
 
 /**
- * GET /api/vehicles/vin/:vin
- * Get vehicle by VIN
+ * POST /api/vehicles/vin/lookup
+ * Lookup vehicle by VIN with validation and decoding
+ * Returns vehicle if found in inventory, plus decoded VIN information
  */
-router.get('/vin/:vin', (req: Request, res: Response) => {
+router.post('/vin/lookup', (req: Request, res: Response) => {
   try {
-    const vehicle = vehicleService.getVehicleByVin(req.params.vin);
+    const { vin } = req.body;
+    
+    if (!vin) {
+      return res.status(400).json({ error: 'VIN is required' });
+    }
+
+    // Validate the VIN
+    const validation = validateVin(vin);
+    if (!validation.isValid) {
+      return res.status(400).json({ 
+        error: 'Invalid VIN',
+        details: validation.error 
+      });
+    }
+
+    // Decode VIN information
+    const decoded = decodeVin(vin);
+
+    // Search for vehicle in inventory
+    const vehicle = vehicleService.getVehicleByVin(validation.normalizedVin || vin);
+    
+    const result: VinLookupResult = {
+      found: !!vehicle,
+      vehicle: vehicle ? {
+        id: vehicle.id,
+        vin: vehicle.vin,
+        make: vehicle.make,
+        model: vehicle.model,
+        year: vehicle.year,
+        color: vehicle.color,
+        condition: vehicle.condition,
+        status: vehicle.status,
+        price: vehicle.price,
+        mileage: vehicle.mileage,
+        fuelType: vehicle.fuelType,
+        transmission: vehicle.transmission,
+        location: vehicle.location
+      } : undefined,
+      decoded: decoded || undefined
+    };
+
+    return res.json(result);
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to lookup VIN' });
+  }
+});
+
+/**
+ * GET /api/vehicles/:id
+ * Get vehicle by ID
+ */
+router.get('/:id', (req: Request, res: Response) => {
+  try {
+    const vehicle = vehicleService.getVehicleById(req.params.id);
     if (!vehicle) {
       return res.status(404).json({ error: 'Vehicle not found' });
     }

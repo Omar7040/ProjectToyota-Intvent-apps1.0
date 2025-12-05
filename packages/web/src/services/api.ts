@@ -31,6 +31,11 @@ export const vehicleApi = {
   getById: (id: string) => fetchApi<Vehicle>(`/vehicles/${id}`),
   getAvailable: () => fetchApi<Vehicle[]>('/vehicles/available'),
   getStatusCount: () => fetchApi<Record<string, number>>('/vehicles/status-count'),
+  getByVin: (vin: string) => fetchApi<Vehicle>(`/vehicles/vin/${vin}`),
+  lookupVin: (vin: string) => fetchApi<VinLookupResult>('/vehicles/vin/lookup', {
+    method: 'POST',
+    body: JSON.stringify({ vin }),
+  }),
   create: (data: CreateVehicleDTO) => fetchApi<Vehicle>('/vehicles', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -317,4 +322,51 @@ export interface CreateInventoryCountDTO {
   dealerId: string;
   countedBy: string;
   notes?: string;
+}
+
+/**
+ * VIN Validation Result
+ */
+export interface VinValidationResult {
+  isValid: boolean;
+  error?: string;
+  normalizedVin?: string;
+}
+
+/**
+ * Decoded VIN information
+ */
+export interface VinDecodedInfo {
+  vin: string;
+  worldManufacturerIdentifier: string;
+  vehicleDescriptorSection: string;
+  checkDigit: string;
+  modelYear: string;
+  plantCode: string;
+  sequentialNumber: string;
+  decodedYear?: number;
+  isNorthAmerican: boolean;
+}
+
+/**
+ * VIN lookup result
+ */
+export interface VinLookupResult {
+  found: boolean;
+  vehicle?: {
+    id: string;
+    vin: string;
+    make: string;
+    model: string;
+    year: number;
+    color: string;
+    condition: string;
+    status: string;
+    price: number;
+    mileage: number;
+    fuelType: string;
+    transmission: string;
+    location: string;
+  };
+  decoded?: VinDecodedInfo;
 }

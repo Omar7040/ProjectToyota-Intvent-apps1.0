@@ -46,3 +46,15 @@ export {
   LoginDTO,
   AuthResponse
 } from './user';
+
+// VIN types and utilities
+export {
+  VinValidationResult,
+  VinDecodedInfo,
+  VinLookupRequest,
+  VinLookupResult,
+  normalizeVin,
+  validateVin,
+  decodeVin,
+  formatVinForDisplay
+} from './vin';

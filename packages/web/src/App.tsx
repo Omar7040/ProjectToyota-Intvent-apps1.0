@@ -4,6 +4,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Inventory } from './pages/Inventory';
 import { Customers } from './pages/Customers';
 import { Sales } from './pages/Sales';
+import { VinScanner } from './pages/VinScanner';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/sales" element={<Sales />} />
+            <Route path="/vin-scanner" element={<VinScanner />} />
           </Routes>
         </main>
       </div>

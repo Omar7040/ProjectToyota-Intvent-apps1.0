@@ -1,0 +1,592 @@
+.vin-scanner-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.header-content h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #1a1a2e;
+}
+
+.header-content p {
+  margin: 0.25rem 0 0;
+  color: #666;
+}
+
+/* Scan Mode Selector */
+.scan-mode-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: #666;
+}
+
+.mode-btn:hover {
+  background: #f0f0f0;
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, #e94560 0%, #d63850 100%);
+  color: white;
+}
+
+/* Scanner Content */
+.scanner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Manual Entry Section */
+.manual-entry-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .manual-entry-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vin-form {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.vin-input-group {
+  margin-bottom: 1.5rem;
+}
+
+.vin-input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.vin-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-family: monospace;
+  letter-spacing: 0.1em;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+  text-transform: uppercase;
+}
+
+.vin-input:focus {
+  outline: none;
+  border-color: #e94560;
+}
+
+.vin-input::placeholder {
+  letter-spacing: normal;
+  text-transform: none;
+  color: #aaa;
+}
+
+.vin-length {
+  display: block;
+  text-align: right;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-lookup {
+  flex: 1;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #e94560 0%, #d63850 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-lookup:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+.btn-lookup:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-clear {
+  padding: 1rem 1.5rem;
+  background: #f0f0f0;
+  color: #666;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-clear:hover {
+  background: #e0e0e0;
+}
+
+/* VIN Format Help */
+.vin-format-help {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.vin-format-help h4 {
+  margin: 0 0 1rem;
+  color: #1a1a2e;
+}
+
+.vin-format-help p {
+  margin: 0 0 1rem;
+  color: #666;
+}
+
+.vin-format-help ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #555;
+}
+
+.vin-format-help li {
+  margin-bottom: 0.5rem;
+}
+
+.vin-format-help .note {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fff3cd;
+  border-radius: 6px;
+  color: #856404;
+  font-size: 0.9rem;
+}
+
+/* Camera Section */
+.camera-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.camera-placeholder {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.camera-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.camera-placeholder p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.btn-start-camera {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-start-camera:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+/* Camera Active */
+.camera-active {
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.camera-viewfinder {
+  position: relative;
+  height: 300px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewfinder-frame {
+  position: relative;
+  width: 80%;
+  height: 60px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #e94560;
+  border-style: solid;
+  border-width: 0;
+}
+
+.corner.top-left {
+  top: -2px;
+  left: -2px;
+  border-top-width: 3px;
+  border-left-width: 3px;
+}
+
+.corner.top-right {
+  top: -2px;
+  right: -2px;
+  border-top-width: 3px;
+  border-right-width: 3px;
+}
+
+.corner.bottom-left {
+  bottom: -2px;
+  left: -2px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+}
+
+.corner.bottom-right {
+  bottom: -2px;
+  right: -2px;
+  border-bottom-width: 3px;
+  border-right-width: 3px;
+}
+
+.scan-line {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #e94560;
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(30px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+}
+
+.scanning-text {
+  position: absolute;
+  bottom: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.camera-controls {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #1a1a2e;
+}
+
+.btn-stop-camera {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-simulate-scan {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Camera Tips */
+.camera-tips {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.camera-tips h4 {
+  margin: 0 0 1rem;
+  color: #1a1a2e;
+}
+
+.camera-tips ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #555;
+}
+
+.camera-tips li {
+  margin-bottom: 0.5rem;
+}
+
+/* Error Message */
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-icon {
+  font-size: 1.2rem;
+}
+
+/* Lookup Results */
+.lookup-results {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.lookup-results h3 {
+  margin: 0 0 1rem;
+  color: #1a1a2e;
+}
+
+.vin-display {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.vin-label {
+  font-weight: 500;
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+.vin-value {
+  font-family: monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: #1a1a2e;
+}
+
+/* Decoded Info */
+.decoded-info {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.decoded-info h4 {
+  margin: 0 0 1rem;
+  color: #1a1a2e;
+}
+
+.decoded-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.decoded-item {
+  background: #f8f9fa;
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.decoded-item .label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.decoded-item .value {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+/* Vehicle Found/Not Found */
+.vehicle-found, .vehicle-not-found {
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.vehicle-found {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.vehicle-found h4 {
+  margin: 0 0 1rem;
+  color: #155724;
+}
+
+.vehicle-not-found {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+.vehicle-not-found h4 {
+  margin: 0 0 0.5rem;
+  color: #721c24;
+}
+
+.vehicle-not-found p {
+  margin: 0;
+  color: #721c24;
+}
+
+.vehicle-not-found .help-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Vehicle Result Card */
+.vehicle-result-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.vehicle-header-result {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.condition-badge {
+  padding: 0.25rem 0.75rem;
+  background: #f0f0f0;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.vehicle-result-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  color: #1a1a2e;
+}
+
+.vehicle-result-card .price {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e94560;
+}
+
+.vehicle-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.detail-icon {
+  font-size: 1rem;
+}
+
+.vehicle-actions {
+  margin-top: 1rem;
+}
+
+.btn-view-inventory {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #e94560 0%, #d63850 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-view-inventory:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
