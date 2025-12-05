@@ -193,14 +193,21 @@ function ImportDutyCalculator() {
             maxLength={17}
             style={styles.input}
             aria-label="VIN input"
+            aria-describedby="vin-char-count"
           />
-          <span style={styles.charCount}>{vin.length}/17 characters</span>
+          <span 
+            id="vin-char-count"
+            style={styles.charCount}
+            aria-live="polite"
+          >
+            {vin.length}/17 characters
+          </span>
           
           {vinInfo && (
-            <div style={styles.vinInfo}>
+            <div style={styles.vinInfo} role="status" aria-live="polite">
               <p style={styles.vinInfoText}>
-                ✓ Valid VIN detected
-                {vinInfo.modelYear && ` • Model Year: ${vinInfo.modelYear}`}
+                Valid VIN detected
+                {vinInfo.modelYear && ` - Model Year: ${vinInfo.modelYear}`}
               </p>
             </div>
           )}
@@ -271,8 +278,8 @@ function ImportDutyCalculator() {
       {/* Error Display */}
       {error && (
         <div style={styles.errorBox} role="alert">
-          <span style={styles.errorIcon}>⚠️</span>
-          <span>{error}</span>
+          <span style={styles.errorIcon} aria-hidden="true">!</span>
+          <span>Warning: {error}</span>
         </div>
       )}
 
@@ -558,6 +565,16 @@ const styles = {
   },
   errorIcon: {
     marginRight: '8px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '20px',
+    height: '20px',
+    backgroundColor: '#c62828',
+    color: '#fff',
+    borderRadius: '50%',
+    fontSize: '14px',
+    fontWeight: 'bold',
   },
   buttonGroup: {
     display: 'flex',

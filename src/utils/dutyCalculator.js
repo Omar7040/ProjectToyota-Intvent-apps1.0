@@ -4,6 +4,15 @@
  */
 
 /**
+ * Round a number to two decimal places
+ * @param {number} value - The value to round
+ * @returns {number} - The value rounded to 2 decimal places
+ */
+function roundToTwoDecimals(value) {
+  return Math.round(value * 100) / 100;
+}
+
+/**
  * Puerto Rico tax brackets for vehicle imports
  * Based on the taxable price of the vehicle
  */
@@ -78,7 +87,7 @@ export function calculatePuertoRicoDuty(vehiclePrice) {
     success: true,
     error: null,
     vehiclePrice,
-    totalDuty: Math.round(totalDuty * 100) / 100,
+    totalDuty: roundToTwoDecimals(totalDuty),
     breakdown: {
       bracket: {
         min: bracket.min,
@@ -87,8 +96,8 @@ export function calculatePuertoRicoDuty(vehiclePrice) {
         percentRate: bracket.percentRate
       },
       fixedTax: bracket.fixedRate,
-      excessAmount: Math.round(excessAmount * 100) / 100,
-      percentageTax: Math.round(percentageTax * 100) / 100
+      excessAmount: roundToTwoDecimals(excessAmount),
+      percentageTax: roundToTwoDecimals(percentageTax)
     },
     currency: 'USD',
     destination: 'Puerto Rico',
@@ -130,11 +139,11 @@ export function calculateExportDuty(vehiclePrice, countryCode) {
     success: true,
     error: null,
     vehiclePrice,
-    totalDuty: Math.round(totalDuty * 100) / 100,
+    totalDuty: roundToTwoDecimals(totalDuty),
     breakdown: {
       countryName: country.name,
       dutyRate: country.rate,
-      dutyAmount: Math.round(dutyAmount * 100) / 100,
+      dutyAmount: roundToTwoDecimals(dutyAmount),
       additionalFees: country.additionalFees
     },
     currency: 'USD',
