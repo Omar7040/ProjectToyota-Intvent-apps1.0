@@ -115,7 +115,8 @@ describe('Vehicle API', () => {
     });
 
     it('should return decoded info even when vehicle not found', async () => {
-      // Use a valid VIN that isn't in our inventory (all 1s is a valid VIN check)
+      // Use a valid VIN that isn't in our inventory
+      // Note: '11111111111111111' is valid because (1*8+1*7+...+1*2) % 11 = 1, and position 9 is '1'
       const response = await request(app)
         .post('/api/vehicles/vin/lookup')
         .send({ vin: '11111111111111111' });

@@ -73,17 +73,44 @@ const VIN_TRANSLITERATION: Record<string, number> = {
 // Position weights for check digit calculation
 const VIN_POSITION_WEIGHTS = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2];
 
-// Model year characters (starting from 1980)
-const MODEL_YEAR_CHARS: Record<string, number> = {
+// Model year characters - VIN year codes repeat every 30 years
+// This mapping shows the first cycle base year for each character
+const MODEL_YEAR_BASE: Record<string, number> = {
   'A': 1980, 'B': 1981, 'C': 1982, 'D': 1983, 'E': 1984, 'F': 1985,
   'G': 1986, 'H': 1987, 'J': 1988, 'K': 1989, 'L': 1990, 'M': 1991,
   'N': 1992, 'P': 1993, 'R': 1994, 'S': 1995, 'T': 1996, 'V': 1997,
   'W': 1998, 'X': 1999, 'Y': 2000, '1': 2001, '2': 2002, '3': 2003,
-  '4': 2004, '5': 2005, '6': 2006, '7': 2007, '8': 2008, '9': 2009,
-  'A2': 2010, 'B2': 2011, 'C2': 2012, 'D2': 2013, 'E2': 2014, 'F2': 2015,
-  'G2': 2016, 'H2': 2017, 'J2': 2018, 'K2': 2019, 'L2': 2020, 'M2': 2021,
-  'N2': 2022, 'P2': 2023, 'R2': 2024, 'S2': 2025, 'T2': 2026
+  '4': 2004, '5': 2005, '6': 2006, '7': 2007, '8': 2008, '9': 2009
 };
+
+// VIN year cycle is 30 years
+const VIN_YEAR_CYCLE = 30;
+
+/**
+ * Decodes the model year from a VIN year character
+ * VIN year codes repeat every 30 years, so we need to determine which cycle
+ * based on the current year context
+ */
+function decodeModelYear(yearChar: string): number | undefined {
+  const baseYear = MODEL_YEAR_BASE[yearChar];
+  if (baseYear === undefined) {
+    return undefined;
+  }
+  
+  const currentYear = new Date().getFullYear();
+  
+  // Calculate which cycle we're in
+  // A vehicle can't be more than 1 year in the future (for upcoming model years)
+  // We assume recent vehicles, so we pick the most recent valid cycle
+  let decodedYear = baseYear;
+  
+  // Add 30-year cycles until we're in a reasonable range
+  while (decodedYear + VIN_YEAR_CYCLE <= currentYear + 1) {
+    decodedYear += VIN_YEAR_CYCLE;
+  }
+  
+  return decodedYear;
+}
 
 /**
  * Normalizes a VIN by removing invalid characters and converting to uppercase
@@ -170,18 +197,8 @@ export function decodeVin(vin: string): VinDecodedInfo | null {
   const normalizedVin = validation.normalizedVin;
   const yearChar = normalizedVin[9];
   
-  // Determine model year - need to consider the cycle repeats every 30 years
-  let decodedYear: number | undefined;
-  const currentYear = new Date().getFullYear();
-  
-  // First try the recent cycle (2010+)
-  const recentKey = `${yearChar}2`;
-  if (MODEL_YEAR_CHARS[recentKey] && MODEL_YEAR_CHARS[recentKey] <= currentYear + 1) {
-    decodedYear = MODEL_YEAR_CHARS[recentKey];
-  } else if (MODEL_YEAR_CHARS[yearChar]) {
-    // Fall back to older cycle
-    decodedYear = MODEL_YEAR_CHARS[yearChar];
-  }
+  // Decode model year using the proper 30-year cycle logic
+  const decodedYear = decodeModelYear(yearChar);
 
   // Check if it's a North American VIN (starts with 1, 4, 5 for USA, 2 for Canada, 3 for Mexico)
   const isNorthAmerican = ['1', '2', '3', '4', '5'].includes(normalizedVin[0]);
