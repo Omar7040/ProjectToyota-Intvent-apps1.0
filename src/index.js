@@ -10,15 +10,17 @@ const Car = require('./models/Car');
 const inventoryController = require('./controllers/inventoryController');
 const adminLogController = require('./controllers/adminLogController');
 const { isAdmin, isManager, isEmployee } = require('./middleware/authorization');
+const { displayLogo } = require('./assets/logo');
 
 /**
  * Initialize the system with sample data
  */
 function initializeSystem() {
+  // Display Toyota logo
+  displayLogo();
+  
   console.log('='.repeat(60));
-  console.log('Toyota Inventory Management System');
-  console.log('='.repeat(60));
-  console.log('\nInitializing system with sample data...\n');
+  console.log('Initializing system with sample data...\n');
 
   // Initialize users and cars
   User.initializeDefaultUsers();
