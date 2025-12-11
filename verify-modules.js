@@ -238,7 +238,9 @@ const employee = User.createUser({
 });
 
 // Test inventory controller with RBAC
-test('Admin can add a car', (done) => {
+// Note: These callbacks execute synchronously in our implementation
+test('Admin can add a car', () => {
+  let testError = null;
   inventoryController.addCar(admin, {
     vin: 'ADMIN_CAR_123',
     model: 'Admin Car',
@@ -246,12 +248,14 @@ test('Admin can add a car', (done) => {
     color: 'Black',
     price: 40000
   }, (err, car) => {
-    if (err) throw err;
-    if (!car || !car.id) throw new Error('Failed to add car');
+    if (err) testError = err;
+    if (!car || !car.id) testError = new Error('Failed to add car');
   });
+  if (testError) throw testError;
 });
 
 test('Manager can add a car', () => {
+  let testError = null;
   inventoryController.addCar(manager, {
     vin: 'MANAGER_CAR_123',
     model: 'Manager Car',
@@ -259,12 +263,15 @@ test('Manager can add a car', () => {
     color: 'White',
     price: 35000
   }, (err, car) => {
-    if (err) throw err;
-    if (!car || !car.id) throw new Error('Failed to add car');
+    if (err) testError = err;
+    if (!car || !car.id) testError = new Error('Failed to add car');
   });
+  if (testError) throw testError;
 });
 
 test('Employee cannot add a car', () => {
+  let testError = null;
+  let callbackExecuted = false;
   inventoryController.addCar(employee, {
     vin: 'EMPLOYEE_CAR_123',
     model: 'Employee Car',
@@ -272,59 +279,83 @@ test('Employee cannot add a car', () => {
     color: 'Green',
     price: 30000
   }, (err, car) => {
-    if (!err) throw new Error('Employee should not be able to add cars');
-    if (err.code !== 'FORBIDDEN') throw new Error('Wrong error code');
+    callbackExecuted = true;
+    if (!err) testError = new Error('Employee should not be able to add cars');
+    else if (err.code !== 'FORBIDDEN') testError = new Error('Wrong error code');
   });
+  if (!callbackExecuted) throw new Error('Callback was not executed');
+  if (testError) throw testError;
 });
 
 test('Manager CANNOT delete a car (critical test)', () => {
   const cars = Car.getAllCars();
   if (cars.length === 0) throw new Error('No cars to test delete');
   
+  let testError = null;
+  let callbackExecuted = false;
   inventoryController.deleteCar(manager, cars[0].id, (err, deletedCar) => {
-    if (!err) throw new Error('Manager should NOT be able to delete cars');
-    if (err.code !== 'FORBIDDEN') throw new Error('Wrong error code');
+    callbackExecuted = true;
+    if (!err) testError = new Error('Manager should NOT be able to delete cars');
+    else if (err.code !== 'FORBIDDEN') testError = new Error('Wrong error code');
   });
+  if (!callbackExecuted) throw new Error('Callback was not executed');
+  if (testError) throw testError;
 });
 
 test('Admin CAN delete a car', () => {
   const cars = Car.getAllCars();
   if (cars.length === 0) throw new Error('No cars to test delete');
   
+  let testError = null;
   inventoryController.deleteCar(admin, cars[0].id, (err, deletedCar) => {
-    if (err) throw err;
-    if (!deletedCar) throw new Error('Failed to delete car');
+    if (err) testError = err;
+    if (!deletedCar) testError = new Error('Failed to delete car');
   });
+  if (testError) throw testError;
 });
 
 console.log('\n--- Verifying Admin Logging ---\n');
 
 test('Admin can view logs', () => {
+  let testError = null;
   adminLogController.getLogs(admin, (err, logs) => {
-    if (err) throw err;
-    if (!Array.isArray(logs)) throw new Error('Logs should be an array');
+    if (err) testError = err;
+    if (!Array.isArray(logs)) testError = new Error('Logs should be an array');
   });
+  if (testError) throw testError;
 });
 
 test('Manager can view logs', () => {
+  let testError = null;
   adminLogController.getLogs(manager, (err, logs) => {
-    if (err) throw err;
-    if (!Array.isArray(logs)) throw new Error('Logs should be an array');
+    if (err) testError = err;
+    if (!Array.isArray(logs)) testError = new Error('Logs should be an array');
   });
+  if (testError) throw testError;
 });
 
 test('Employee cannot view logs', () => {
+  let testError = null;
+  let callbackExecuted = false;
   adminLogController.getLogs(employee, (err, logs) => {
-    if (!err) throw new Error('Employee should not be able to view logs');
-    if (err.code !== 'FORBIDDEN') throw new Error('Wrong error code');
+    callbackExecuted = true;
+    if (!err) testError = new Error('Employee should not be able to view logs');
+    else if (err.code !== 'FORBIDDEN') testError = new Error('Wrong error code');
   });
+  if (!callbackExecuted) throw new Error('Callback was not executed');
+  if (testError) throw testError;
 });
 
 test('Only admin can clear logs', () => {
+  let testError = null;
+  let callbackExecuted = false;
   adminLogController.clearLogs(manager, (err, result) => {
-    if (!err) throw new Error('Manager should not be able to clear logs');
-    if (err.code !== 'FORBIDDEN') throw new Error('Wrong error code');
+    callbackExecuted = true;
+    if (!err) testError = new Error('Manager should not be able to clear logs');
+    else if (err.code !== 'FORBIDDEN') testError = new Error('Wrong error code');
   });
+  if (!callbackExecuted) throw new Error('Callback was not executed');
+  if (testError) throw testError;
 });
 
 test('Logs contain access denied entries', () => {
