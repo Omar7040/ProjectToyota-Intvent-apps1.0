@@ -187,6 +187,38 @@ button:active {
     background: linear-gradient(135deg, #e67e22 0%, #c0392b 100%);
 }
 
+.suspension-options,
+.supercharger-options,
+.transmission-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.suspension-btn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.suspension-btn:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+}
+
+.supercharger-btn {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+}
+
+.supercharger-btn:hover {
+    background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%);
+}
+
+.transmission-btn {
+    background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+}
+
+.transmission-btn:hover {
+    background: linear-gradient(135deg, #16a085 0%, #117864 100%);
+}
+
 /* Game Screen Styles */
 #game-screen {
     padding: 20px;
