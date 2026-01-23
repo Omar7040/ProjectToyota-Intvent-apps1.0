@@ -44,7 +44,10 @@ function init() {
         model: 'Toyota Camry',
         color: 'red',
         engineLevel: 1,
-        maxSpeed: 5
+        maxSpeed: 5,
+        suspensionLevel: 1,
+        superchargerLevel: 1,
+        transmissionLevel: 1
     });
 
     // Generate city layout
@@ -102,7 +105,10 @@ function generateStreetCars() {
             model: carModels[Math.floor(Math.random() * carModels.length)],
             color: colors[Math.floor(Math.random() * colors.length)],
             collected: false,
-            engineLevel: Math.floor(Math.random() * 3) + 1
+            engineLevel: Math.floor(Math.random() * 3) + 1,
+            suspensionLevel: Math.floor(Math.random() * 3) + 1,
+            superchargerLevel: Math.floor(Math.random() * 3) + 1,
+            transmissionLevel: Math.floor(Math.random() * 3) + 1
         });
     }
 }
@@ -182,6 +188,9 @@ function updateGarageDisplay() {
             <h4>${car.model}</h4>
             <p>Color: <span style="color: ${car.color}">█</span> ${car.color}</p>
             <p>Motor: Nivel ${car.engineLevel}</p>
+            <p>Suspensión: Nivel ${car.suspensionLevel}</p>
+            <p>Supercargador: Nivel ${car.superchargerLevel}</p>
+            <p>Transmisión: Nivel ${car.transmissionLevel}</p>
             <p>Vel. Máx: ${3 + (car.engineLevel * 2)} km/h</p>
         `;
         
@@ -196,6 +205,9 @@ function updateGarageDisplay() {
             <h4>Auto Seleccionado: ${selectedCar.model}</h4>
             <p>Color actual: ${selectedCar.color}</p>
             <p>Motor actual: Nivel ${selectedCar.engineLevel}</p>
+            <p>Suspensión actual: Nivel ${selectedCar.suspensionLevel}</p>
+            <p>Supercargador actual: Nivel ${selectedCar.superchargerLevel}</p>
+            <p>Transmisión actual: Nivel ${selectedCar.transmissionLevel}</p>
         `;
         document.getElementById('modification-options').style.display = 'block';
     }
@@ -228,6 +240,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 gameState.playerCars[gameState.selectedCarIndex].maxSpeed = 3 + (level * 2);
                 updateGarageDisplay();
                 showMessage('¡Motor actualizado!');
+            }
+        };
+    });
+    
+    document.querySelectorAll('.suspension-btn').forEach(btn => {
+        btn.onclick = () => {
+            const level = parseInt(btn.dataset.level);
+            if (gameState.playerCars.length > 0) {
+                gameState.playerCars[gameState.selectedCarIndex].suspensionLevel = level;
+                updateGarageDisplay();
+                showMessage('¡Suspensión actualizada!');
+            }
+        };
+    });
+    
+    document.querySelectorAll('.supercharger-btn').forEach(btn => {
+        btn.onclick = () => {
+            const level = parseInt(btn.dataset.level);
+            if (gameState.playerCars.length > 0) {
+                gameState.playerCars[gameState.selectedCarIndex].superchargerLevel = level;
+                updateGarageDisplay();
+                showMessage('¡Supercargador actualizado!');
+            }
+        };
+    });
+    
+    document.querySelectorAll('.transmission-btn').forEach(btn => {
+        btn.onclick = () => {
+            const level = parseInt(btn.dataset.level);
+            if (gameState.playerCars.length > 0) {
+                gameState.playerCars[gameState.selectedCarIndex].transmissionLevel = level;
+                updateGarageDisplay();
+                showMessage('¡Transmisión actualizada!');
             }
         };
     });
@@ -353,7 +398,10 @@ function collectCar(car) {
         model: car.model,
         color: car.color,
         engineLevel: car.engineLevel,
-        maxSpeed: 3 + (car.engineLevel * 2)
+        maxSpeed: 3 + (car.engineLevel * 2),
+        suspensionLevel: car.suspensionLevel,
+        superchargerLevel: car.superchargerLevel,
+        transmissionLevel: car.transmissionLevel
     });
     
     showMessage(`¡Auto encontrado! ${car.model}`);
