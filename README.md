@@ -1,10 +1,12 @@
 # ProjectToyota-Intvent-apps1.0
 
-Sistema de gestión de inventario para un concesionario Toyota con control de acceso basado en roles (RBAC) y registro de auditoría administrativa.
+Sistema de gestión de inventario para un concesionario Toyota con control de acceso basado en roles (RBAC) y registro de auditoría administrativa, además de un juego web de carreras.
 
 ## Descripción
 
 En este proyecto trabajamos con una app tanto móvil como web, que maneja el inventario de un dealer, se encarga del conteo de autos y el flujo de ventas del mismo, y cuenta cuántas solicitudes son terminadas en ventas y cuáles son posibles clientes para poder ayudarles en el proceso de adquisición de un auto.
+
+**NUEVO:** Ahora incluye un juego web de carreras donde puedes conducir en una ciudad, encontrar autos en las calles, modificar su carrocería y motor, y competir en carreras emocionantes.
 
 ## Características Principales
 
@@ -31,12 +33,49 @@ El sistema implementa tres niveles de acceso:
 # Instalar dependencias
 npm install
 
-# Ejecutar demo
+# Ejecutar demo del sistema de inventario
 npm start
+
+# Ejecutar el juego de carreras
+npm run game
 
 # Ejecutar pruebas
 npm test
 ```
+
+## 🏎️ Juego de Carreras Toyota Racing
+
+### Características del Juego
+
+- **Exploración de Ciudad**: Conduce por las calles de una ciudad con edificios y carreteras
+- **Colección de Autos**: Encuentra y colecciona autos Toyota en las calles
+- **Modificación de Autos**: 
+  - 🎨 **Carrocería**: Cambia el color de tus autos (8 colores disponibles)
+  - ⚙️ **Motor**: Mejora el motor para aumentar la velocidad máxima (4 niveles)
+- **Carreras**: Compite contra 3 rivales en carreras emocionantes
+- **Garaje**: Administra tu colección de autos y personalízalos
+
+### Controles del Juego
+
+- **Flechas ↑↓←→** o **WASD**: Mover el auto
+- **Espacio**: Frenar
+- **ESC**: Pausa / Volver al menú
+
+### Cómo Jugar
+
+1. Ejecuta `npm run game`
+2. Abre tu navegador en `http://localhost:3000`
+3. Haz clic en "Comenzar Juego"
+4. Conduce por la ciudad y busca los autos marcados con un ✨ amarillo
+5. Colecciona todos los autos para iniciar una carrera
+6. Visita el "Garaje de Autos" para modificar tus vehículos
+
+### Niveles de Motor
+
+- **Nivel 1 - Motor Básico**: Velocidad máxima 5 km/h
+- **Nivel 2 - Motor Deportivo**: Velocidad máxima 7 km/h
+- **Nivel 3 - Motor Turbo**: Velocidad máxima 9 km/h
+- **Nivel 4 - Motor Super Turbo**: Velocidad máxima 11 km/h
 
 ## Estructura del Proyecto
 

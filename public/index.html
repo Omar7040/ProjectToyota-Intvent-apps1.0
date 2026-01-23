@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota Racing - Juego de Carreras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="main-menu" class="screen active">
+            <h1>🏎️ Toyota Racing 🏎️</h1>
+            <h2>Juego de Carreras en la Ciudad</h2>
+            <div class="menu-buttons">
+                <button onclick="startGame()">Comenzar Juego</button>
+                <button onclick="showGarage()">Garaje de Autos</button>
+                <button onclick="showInstructions()">Instrucciones</button>
+            </div>
+        </div>
+
+        <div id="instructions" class="screen">
+            <h2>📖 Instrucciones</h2>
+            <div class="instructions-content">
+                <h3>Controles:</h3>
+                <ul>
+                    <li><strong>Flechas ↑↓←→</strong> o <strong>WASD</strong> - Mover el auto</li>
+                    <li><strong>Espacio</strong> - Frenar</li>
+                    <li><strong>ESC</strong> - Pausa / Menú</li>
+                </ul>
+                <h3>Objetivo:</h3>
+                <ul>
+                    <li>🏁 Encuentra autos en las calles de la ciudad</li>
+                    <li>🏆 Compite en carreras contra otros autos</li>
+                    <li>⚙️ Modifica tu auto en el garaje (carrocería y motor)</li>
+                    <li>💰 Gana carreras para desbloquear mejoras</li>
+                </ul>
+            </div>
+            <button onclick="showMainMenu()">Volver al Menú</button>
+        </div>
+
+        <div id="garage" class="screen">
+            <h2>🔧 Garaje de Autos</h2>
+            <div id="car-list">
+                <!-- Cars will be populated here -->
+            </div>
+            <div id="modification-panel">
+                <h3>Modificación de Auto</h3>
+                <div id="selected-car-info">
+                    <p>Selecciona un auto para modificar</p>
+                </div>
+                <div id="modification-options" style="display:none;">
+                    <div class="mod-section">
+                        <h4>🎨 Carrocería</h4>
+                        <div class="color-options">
+                            <button class="color-btn" data-color="red" style="background-color: #ff0000;"></button>
+                            <button class="color-btn" data-color="blue" style="background-color: #0000ff;"></button>
+                            <button class="color-btn" data-color="green" style="background-color: #00ff00;"></button>
+                            <button class="color-btn" data-color="yellow" style="background-color: #ffff00;"></button>
+                            <button class="color-btn" data-color="black" style="background-color: #000000;"></button>
+                            <button class="color-btn" data-color="white" style="background-color: #ffffff;"></button>
+                            <button class="color-btn" data-color="silver" style="background-color: #c0c0c0;"></button>
+                            <button class="color-btn" data-color="orange" style="background-color: #ff6600;"></button>
+                        </div>
+                    </div>
+                    <div class="mod-section">
+                        <h4>⚙️ Motor</h4>
+                        <div class="engine-options">
+                            <button class="engine-btn" data-level="1">Motor Básico (Vel: 3)</button>
+                            <button class="engine-btn" data-level="2">Motor Deportivo (Vel: 5)</button>
+                            <button class="engine-btn" data-level="3">Motor Turbo (Vel: 7)</button>
+                            <button class="engine-btn" data-level="4">Motor Super Turbo (Vel: 10)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="showMainMenu()">Volver al Menú</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div id="game-hud">
+                <div id="hud-stats">
+                    <div>Velocidad: <span id="speed">0</span> km/h</div>
+                    <div>Autos Encontrados: <span id="cars-found">0</span></div>
+                    <div>Carreras Ganadas: <span id="races-won">0</span></div>
+                </div>
+                <div id="hud-message"></div>
+            </div>
+            <canvas id="game-canvas" width="800" height="600"></canvas>
+            <div id="game-controls">
+                <p>ESC - Menú | Flechas/WASD - Mover | Espacio - Frenar</p>
+            </div>
+        </div>
+
+        <div id="race-screen" class="screen">
+            <h2>🏁 Carrera</h2>
+            <div id="race-info">
+                <p>Preparándose para la carrera...</p>
+            </div>
+            <canvas id="race-canvas" width="800" height="600"></canvas>
+            <div id="race-hud">
+                <div>Posición: <span id="race-position">1</span>/<span id="total-racers">4</span></div>
+                <div>Vuelta: <span id="current-lap">1</span>/3</div>
+                <div>Tiempo: <span id="race-time">0:00</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
